@@ -1,0 +1,9 @@
+# Core EVTX & BinXML parsing
+python-evtx>=0.7.4
+lxml>=4.9.0
+
+# Sigma rule YAML parsing & evaluation
+PyYAML>=6.0
+
+# Testing & development (optional)
+pytest>=7.0.0

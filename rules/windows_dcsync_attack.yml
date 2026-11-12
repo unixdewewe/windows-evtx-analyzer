@@ -1,0 +1,21 @@
+title: Potential DCSync Active Directory Replication Abuse
+id: 6112f684-9b34-4c8d-8e2a-11a9c3b9f102
+status: stable
+level: critical
+description: Detects access to Active Directory replication rights (DS-Replication-Get-Changes-All) by non-machine accounts.
+tags:
+  - attack.credential_access
+  - attack.t1003.006
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4662
+    Properties|contains:
+      - '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2'
+      - '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2'
+      - '89e95b76-444d-4c62-991a-0facbeda640c'
+  filter_machine_accounts:
+    SubjectUserName|endswith: '$'
+  condition: selection and not filter_machine_accounts

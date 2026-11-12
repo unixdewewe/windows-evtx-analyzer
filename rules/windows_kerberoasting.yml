@@ -1,0 +1,20 @@
+title: Potential Kerberoasting Service Ticket Request (RC4)
+id: 94f1c2d0-4a8e-4f11-b81a-2e7d81c0e415
+status: stable
+level: high
+description: Detects Kerberos TGS requests (Event ID 4769) using RC4 encryption (0x17) for non-machine service accounts.
+tags:
+  - attack.credential_access
+  - attack.t1558.003
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4769
+    TicketEncryptionType: '0x17'
+  filter_machine:
+    ServiceName|endswith: '$'
+  filter_krbtgt:
+    ServiceName: 'krbtgt'
+  condition: selection and not filter_machine and not filter_krbtgt

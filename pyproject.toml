@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "windows-evtx-analyzer"
+version = "0.2.0"
+description = "Enterprise Windows Event Log (.evtx) Forensic Analysis, Indexing & Sigma Hunting Tool"
+readme = "README.md"
+authors = [
+    { name = "Rashid Dewewe", email = "shantidewewe35@gmail.com" }
+    ]
+license = { text = "Apache-2.0" }
+
+requires-python = ">=3.9"
+dependencies = [
+    "python-evtx>=0.7.4",
+    "lxml>=4.9.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+]
+
+[project.scripts]
+evtx-analyzer = "src.cli:main"
+
+# mandatory for src layout packaging.
+[tool.setuptools.packages.find]
+where = ["src"]
