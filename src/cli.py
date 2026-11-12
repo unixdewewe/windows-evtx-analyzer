@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--db", help="Path to SQLite case database (enables WAL + FTS5 indexing)")
     parser.add_argument("--rules", default="rules", help="Directory containing YAML Sigma detection rules")
     parser.add_argument("--query", type=str, help="Full-text FTS5 query against an existing --db")
-    parser.add_argument("-o", "--output", required=False, help="Output file path (.json or .csv)")
+    parser.add_argument("-o", "--output", required=True, help="Output file path (.json or .csv)")
     parser.add_argument("--alerts-out", help="Optional output JSON path for Sigma rule detection alerts")
     parser.add_argument("--format", choices=["json", "csv"], default="json", help="Export format")
     parser.add_argument("--event-ids", nargs="+", type=int, help="Filter by specific Event IDs")
