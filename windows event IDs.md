@@ -1,3 +1,7 @@
+Here is the updated Windows Event ID catalog, expanded to include **Sysmon Event IDs**, **DNS Events**, and **Network Activity monitoring IDs** alongside the core Windows security and Active Directory event logs.
+
+---
+
 ### 1. Logon / Logoff Events
 
 * **4624** – An account was successfully logged on (also described as *Successful logon*).
@@ -40,6 +44,7 @@
 
 
 
+---
 
 ### 2. System Startup / Shutdown
 
@@ -50,6 +55,7 @@
 
 
 
+---
 
 ### 3. Authentication & Security Packages
 
@@ -69,6 +75,7 @@
 
 
 
+---
 
 ### 4. Object Access & Registry (Access Events)
 
@@ -103,6 +110,7 @@
 
 
 
+---
 
 ### 5. Process & Service Events
 
@@ -113,6 +121,7 @@
 
 
 
+---
 
 ### 6. High-Criticality Security Events
 
@@ -123,6 +132,7 @@
 
 
 
+---
 
 ### 7. Active Directory, Account, and Group Events
 
@@ -262,6 +272,7 @@
 
 
 
+---
 
 ### 8. Auditing Events
 
@@ -287,3 +298,46 @@
 
 
 * **4907** – Auditing settings on an object were changed.
+
+
+
+---
+
+### 9. Microsoft Sysmon (System Monitor) Events
+
+*(Logged under `Microsoft-Windows-Sysmon/Operational`)*
+
+* **Sysmon 1** – Process Creation (Captures full command line, parent process, user, and binary hashes).
+* **Sysmon 2** – File Creation Time Change (Tracks explicit modification of file timestamps to hide origin).
+* **Sysmon 3** – Network Connection (Logs TCP/UDP connections with source/destination IPs, ports, and parent process).
+* **Sysmon 4** – Sysmon Service State Changed (Detects if the monitoring service is stopped or changed).
+* **Sysmon 5** – Process Terminated (Logs when a process stops executing).
+* **Sysmon 6** – Driver Loaded (Logs drivers loaded into the system, exposing vulnerable or unsigned drivers).
+* **Sysmon 7** – Image Loaded / DLL Load (Detects DLL injection and hijacking).
+* **Sysmon 8** – CreateRemoteThread (Detects process injection where one process creates a thread in another).
+* **Sysmon 9** – RawAccessRead (Detects low-level disk reading behavior bypassing file system APIs).
+* **Sysmon 10** – Process Access / OpenProcess (Frequently used to detect LSASS memory dumping / credential harvesting).
+* **Sysmon 11** – File Created (Tracks new files written to disk, vital for ransomware and artifact analysis).
+* **Sysmon 12 / 13 / 14** – Registry Events (Tracks registry key/value creation, modification, and renaming for persistence mechanisms).
+* **Sysmon 15** – FileCreateStreamHash (Detects Alternate Data Streams [ADS] and Mark-of-the-Web bypasses).
+* **Sysmon 16** – Sysmon Configuration Change (Audits updates to the active Sysmon config file).
+* **Sysmon 17 / 18** – Named Pipe Created / Connected (Tracks Inter-Process Communication used by malware/lateral movement).
+* **Sysmon 19 / 20 / 21** – WMI Events (WMI filter, consumer, and binding activity monitoring).
+* **Sysmon 22** – DNS Query / DNS Event (Logs DNS queries executed by processes, capturing domain lookups and C2 beaconing).
+* **Sysmon 23 / 26** – File Delete (Tracks deleted files and artifacts).
+* **Sysmon 25** – Process Tampering (Detects process hollowing/masquerading techniques).
+
+---
+
+### 10. Windows DNS Client & Server Events
+
+*(Network Name Resolution & Server Operations)*
+
+* **DNS Client Events (Operational / Client-side):**
+* **1014** – Name Resolution Warning (Logged when the DNS client fails to resolve names for a destination query).
+
+
+* **DNS Server Events (`Microsoft-Windows-DNS-Server/Operational`):**
+* **4000 / 4004** – DNS Server encountered a critical error or startup failure.
+* **4015** – DNS Server encountered a critical error with Active Directory.
+* **7050 / 7052 / 7053** – Zone transfers and dynamic updates.
