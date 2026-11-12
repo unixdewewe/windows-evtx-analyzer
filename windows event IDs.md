@@ -1,4 +1,4 @@
-Here is the updated Windows Event ID catalog, expanded to include **Sysmon Event IDs**, **DNS Events**, and **Network Activity monitoring IDs** alongside the core Windows security and Active Directory event logs.
+                            WINDOWS EVENT IDs
 
 ---
 
