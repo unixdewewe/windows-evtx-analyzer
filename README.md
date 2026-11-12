@@ -101,6 +101,128 @@ evtx-analyzer --db case01.db --query "mimikatz OR sekurlsa OR psexec" -o search_
 evtx-analyzer -i ./collected_logs/Security.evtx --event-ids 4624 4625 4688 4769 -o auth_events.csv --format csv
 ```
 
+
+### Ingestion, Indexing & Baseline Timelines
+
+1. **Basic directory ingestion to a JSON timeline:**
+```powershell
+evtx-analyzer -i "C:\Triage\Logs\" -o timeline.json
+
+```
+
+
+2. **Single `.evtx` file ingestion exported directly to CSV:**
+```powershell
+evtx-analyzer -i "C:\Triage\Security.evtx" -o security_timeline.csv --format csv
+
+```
+
+
+3. **Ingesting a folder of logs into a high-performance SQLite case database:**
+```powershell
+evtx-analyzer -i "C:\Triage\Logs\" --db case01.db -o timeline.json
+
+```
+
+
+4. **Ingesting logs while simultaneously scanning against custom Sigma rules and exporting alerts:**
+```powershell
+evtx-analyzer -i "C:\Triage\Logs\" --db case01.db --rules "C:\Rules\" -o timeline.json --alerts-out alerts.json
+
+```
+
+
+5. **Batch processing Sysmon operational telemetry logs into a dedicated case database:**
+```powershell
+evtx-analyzer -i "C:\Triage\Sysmon\Microsoft-Windows-Sysmon%4Operational.evtx" --db sysmon_case.db -o sysmon_timeline.json
+
+```
+
+
+
+---
+
+### Sigma Threat Hunting & Alerting
+
+6. **Running a standalone Sigma scan on an existing folder of logs with custom rule paths:**
+```powershell
+evtx-analyzer -i "C:\Triage\Logs\" --rules "D:\Custom_Sigma_Repo\rules\" -o output_timeline.json --alerts-out threat_alerts.json
+
+```
+
+
+7. **Exporting Sigma alerts to JSON while outputting the core timeline as a CSV spreadsheet:**
+```powershell
+evtx-analyzer -i "C:\Triage\Logs\" --db case01.db --rules "rules\" -o incident_report.csv --format csv --alerts-out critical_alerts.json
+
+```
+
+
+8. **Targeting Active Directory domain controller logs for DCSync and Kerberoasting rules:**
+```powershell
+evtx-analyzer -i "C:\Triage\DC_Logs\" --rules "rules\" -o dc_timeline.json --alerts-out dc_sigma_hits.json
+
+```
+
+
+
+---
+
+### SQLite + FTS5 Full-Text Search (Pivoting)
+
+9. **Searching an indexed case database for credential dumping tools:**
+```powershell
+evtx-analyzer --db case01.db --query "mimikatz OR sekurlsa OR lsass" -o credential_dump_hits.json
+
+```
+
+
+10. **Querying an indexed database for PowerShell execution artifacts:**
+```powershell
+evtx-analyzer --db case01.db --query "powershell -enc OR Invoke-Command OR DownloadString" -o ps_hits.json
+
+```
+
+
+11. **Searching for suspicious network connections or external IP addresses:**
+```powershell
+evtx-analyzer --db case01.db --query "DestinationIp AND NOT 10.0.0." -o external_conns.json
+
+```
+
+
+12. **Looking up specific process names using FTS5 indexing:**
+```powershell
+evtx-analyzer --db case01.db --query "cmd.exe OR powershell.exe OR wscript.exe" -o suspicious_processes.json
+
+```
+
+
+
+---
+
+### Structured Filtering & Specialized Extractions
+
+13. **Filtering an existing SQLite database by specific Event IDs (e.g., Logon Success 4624 & Failure 4625):**
+```powershell
+evtx-analyzer --db case01.db --event-ids 4624 4625 -o authentication_events.json
+
+```
+
+
+14. **Filtering an SQLite database by a forensic keyword and exporting to CSV:**
+```powershell
+evtx-analyzer --db case01.db --keyword "Administrator" -o admin_activity.csv --format csv
+
+```
+
+
+15. **Extracting process creation events (`EventID 4688` and `Sysmon ID 1`) from an indexed case database:**
+```powershell
+evtx-analyzer --db case01.db --event-ids 4688 1 -o process_lineage.json
+
+```
+
 ---
 
 ## Forensic Investigation Workflow
