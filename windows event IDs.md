@@ -1,310 +1,175 @@
-                            WINDOWS EVENT IDs
+# WINDOWS EVENT IDs
 
 ---
 
 ### 1. Logon / Logoff Events
 
 * **4624** – An account was successfully logged on (also described as *Successful logon*).
-
-
 * **4625** – An account failed to log on (also described as *Failed logon*).
-
-
 * **4634** – The logoff process was completed for a user (also described as *Logoff*).
-
-
 * **4647** – A user initiated the logoff process (also described as *User initiated logoff*).
-
-
 * **4648** – A logon was attempted using explicit credentials (also described as *Logon using explicit credentials*).
-
-
 * **4672** – Special privileges have been assigned to a new logon (also described as *Special privileges assigned to new logon*).
-
-
 * **4723** – An attempt was made to change an account’s password.
-
-
 * **4724** – An attempt was made to reset an account’s password.
-
-
 * **4740** – A user account was locked out.
-
-
 * **4767** – A user account was unlocked.
-
-
 * **4779** – A session was disconnected from a Window Station (also described as *Session disconnected*).
-
-
 * **4964** – Special groups have been assigned to a new logon (also described as *Special groups assigned to new logon*).
-
-
 * **5378** – The requested credentials delegation was disallowed by policy.
-
-
 
 ---
 
 ### 2. System Startup / Shutdown
 
 * **4608** – Windows is starting up.
-
-
 * **4609** – Windows is shutting down.
-
-
 
 ---
 
 ### 3. Authentication & Security Packages
 
 * **4610** – Authentication package loaded.
-
-
 * **4611** – Trusted logon process registered.
-
-
 * **4614** – Notification package loaded.
-
-
 * **4615** – Invalid LPC port use.
-
-
 * **4616** – System time changed.
-
-
 
 ---
 
 ### 4. Object Access & Registry (Access Events)
 
 * **4656** – A handle to an object was requested (also described as *Handle to object requested*).
-
-
 * **4657** – A registry value was modified.
-
-
 * **4658** – A handle to an object was closed.
-
-
 * **4660** – An object was deleted (also described as *Object deleted*).
-
-
 * **4663** – An attempt was made to access an object (also described as *Attempt to access an object*).
-
-
 * **4670** – Permissions on an object were changed.
-
-
 * **5140** – A network share object was accessed.
-
-
 * **5142** – A network share object was added.
-
-
 * **5143** – A network share object was modified.
-
-
 * **5144** – A network share object was deleted.
-
-
 
 ---
 
 ### 5. Process & Service Events
 
-* **4688** – New process created.
-
-
-* **4697** – Service installed.
-
-
+* **4688** – New process created (often enhanced with command line auditing).
+* **4697** – Service installed (A service was installed in the system).
+* **Sysmon 1** – Process Creation (Captures full command line, parent process, user, binary hashes, and token elevations).
+* **Sysmon 5** – Process Terminated (Logs when a process stops executing).
 
 ---
 
 ### 6. High-Criticality Security Events
 
 * **4618** – Monitored security event pattern occurred.
-
-
 * **4649** – Replay attack detected.
 
-
-
 ---
 
-### 7. Active Directory, Account, and Group Events
+### 7. Active Directory (AD), Account, Group, & Kerberos Events
 
+#### **Kerberos & Authentication Tickets (Kerberoasting)**
+* **4768** – A Kerberos authentication ticket (TGT) was requested.
+* **4769** – A Kerberos service ticket was requested *(Crucial for detecting Kerberoasting: high-volume requests for Service Principal Names [SPNs] or use of weak encryption types like RC4 `0x17`)*.
+* **4770** – A Kerberos service ticket was renewed.
+
+#### **Account, Group & Domain Object Management**
 * **4720** – A user account was created.
-
-
 * **4722** – A user account was enabled.
-
-
 * **4725** – A user account was disabled.
-
-
 * **4726** – A user account was deleted.
-
-
 * **4727** – A security-enabled global group was created.
-
-
 * **4728** – A member was added to a security-enabled global group.
-
-
 * **4729** – A member was removed from a security-enabled global group.
-
-
 * **4730** – A security-enabled global group was deleted.
-
-
 * **4731** – A security-enabled local group was created.
-
-
 * **4732** – A member was added to a security-enabled local group.
-
-
 * **4733** – A member was removed from a security-enabled local group.
-
-
 * **4734** – A security-enabled local group was deleted.
-
-
 * **4735** – A security-enabled local group was changed.
-
-
 * **4737** – A security-enabled global group was changed.
-
-
 * **4738** – A user account was changed.
-
-
 * **4739** – Domain Policy was changed.
-
-
 * **4741** – A computer account was created.
-
-
 * **4742** – A computer account was changed.
-
-
 * **4743** – A computer account was deleted.
-
-
 * **4744** – A security-disabled local group was created.
-
-
 * **4745** – A security-disabled local group was changed.
-
-
 * **4746** – A member was added to a security-disabled local group.
-
-
 * **4747** – A member was removed from a security-disabled local group.
-
-
 * **4748** – A security-disabled local group was deleted.
-
-
 * **4749** – A security-disabled global group was created.
-
-
 * **4750** – A security-disabled global group was changed.
-
-
 * **4751** – A member was added to a security-disabled global group.
-
-
 * **4752** – A member was removed from a security-disabled global group.
-
-
 * **4753** – A security-disabled global group was deleted.
-
-
 * **4754** – A security-enabled universal group was created.
-
-
 * **4755** – A security-enabled universal group was changed.
-
-
 * **4756** – A member was added to a security-enabled universal group.
-
-
 * **4757** – A member was removed from a security-enabled universal group.
-
-
 * **4758** – A security-enabled universal group was deleted.
-
-
 * **4759** – A security-disabled universal group was created.
-
-
 * **4760** – A security-disabled universal group was changed.
-
-
 * **4761** – A member was added to a security-disabled universal group.
-
-
 * **4762** – A member was removed from a security-disabled universal group.
-
-
 * **4763** – A security-disabled universal group was deleted.
-
-
 * **4764** – A group type was changed.
-
-
 * **5136** – A directory service object was modified.
-
-
 * **5137** – A directory service object was created.
-
-
 * **5138** – A directory service object was undeleted.
-
-
 * **5139** – A directory service object was moved.
-
-
 * **5141** – A directory service object was deleted.
 
+---
 
+### 8. Persistence Mechanisms (Registry, Drivers, WMI, & Services)
+
+* **4697 / Sysmon 6** – Service installed / Driver loaded into the system (exposes vulnerable, unsigned, or rootkit drivers).
+* **Sysmon 2** – File Creation Time Change (Timestomping to hide origin of malicious persistence artifacts).
+* **Sysmon 7** – Image Loaded / DLL Load (Detects DLL Hijacking and Injection persistence).
+* **Sysmon 12, 13, 14** – Registry Events (Key/Value creation, modification, and renaming used heavily for Run keys, Startup folders, and IFEO persistence).
+* **Sysmon 15** – FileCreateStreamHash (Detects Alternate Data Streams [ADS] and Mark-of-the-Web bypasses used to hide executable payloads).
+* **Sysmon 17 / 18** – Named Pipe Created / Connected (Tracks Inter-Process Communication used for backdoors or lateral movement persistence).
+* **Sysmon 19, 20, 21** – WMI Events (WMI filter, consumer, and binding activity leveraged for fileless persistence).
 
 ---
 
-### 8. Auditing Events
+### 9. PowerShell, Program, & Script Execution
+
+* **PowerShell Operational 4103** – Module Logging (Pipeline execution details).
+* **PowerShell Operational 4104** – Script Block Logging (Captures full script blocks as they are executed or compiled, exposing malicious payloads, obfuscation, or download cradles).
+* **PowerShell Operational 4105 / 4106** – Transcription logs / Start-Stop execution metadata.
+* **Windows PowerShell Legacy Log 400** – Engine startup (Useful to spot PowerShell version downgrades to v2 to bypass security controls).
+* **Sysmon 1** – Process Creation (Tracks command-line execution for `cmd.exe`, `powershell.exe`, `cscript.exe`, `wscript.exe`, and custom binaries).
+
+---
+
+### 10. Scheduled Tasks
+
+* **4698** – A scheduled task was created (includes Task Name and full XML configuration payload).
+* **4699** – A scheduled task was deleted.
+* **4700** – A scheduled task was enabled.
+* **4701** – A scheduled task was disabled.
+* **4702** – A scheduled task was updated.
+
+---
+
+### 11. Auditing Events
 
 * **1100** – The event logging service has shut down.
-
-
 * **1101** – Audit events have been dropped by the transport.
-
-
-* **1102** – The audit log was cleared.
-
-
+* **1102** – The audit log was cleared (high-priority indicator of defense evasion/attacker cleanup).
 * **1104** – The security log is now full.
-
-
 * **1108** – The event logging service encountered an error while processing an incoming event.
-
-
 * **4612** – Internal resources allocated for the queuing of audit messages have been exhausted, leading to the loss of some audits.
-
-
 * **4719** – System audit policy was changed.
-
-
 * **4907** – Auditing settings on an object were changed.
-
-
 
 ---
 
-### 9. Microsoft Sysmon (System Monitor) Events
-
+### 12. Microsoft Sysmon (System Monitor) Events (Complete Reference)
 *(Logged under `Microsoft-Windows-Sysmon/Operational`)*
 
 * **Sysmon 1** – Process Creation (Captures full command line, parent process, user, and binary hashes).
@@ -329,15 +194,15 @@
 
 ---
 
-### 10. Windows DNS Client & Server Events
-
+### 13. Windows DNS Client & Server Events & Network Activity
 *(Network Name Resolution & Server Operations)*
 
+* **Network & DNS Sysmon Events:**
+  * **Sysmon 3** – Network Connection (Logs TCP/UDP network connections made by processes, capturing source/destination IPs, ports, and protocols).
+  * **Sysmon 22** – DNS Query (Logs DNS requests made by processes, identifying command-and-control [C2] domains and beaconing behavior).
 * **DNS Client Events (Operational / Client-side):**
-* **1014** – Name Resolution Warning (Logged when the DNS client fails to resolve names for a destination query).
-
-
+  * **1014** – Name Resolution Warning (Logged when the DNS client fails to resolve names for a destination query).
 * **DNS Server Events (`Microsoft-Windows-DNS-Server/Operational`):**
-* **4000 / 4004** – DNS Server encountered a critical error or startup failure.
-* **4015** – DNS Server encountered a critical error with Active Directory.
-* **7050 / 7052 / 7053** – Zone transfers and dynamic updates.
+  * **4000 / 4004** – DNS Server encountered a critical error or startup failure.
+  * **4015** – DNS Server encountered a critical error with Active Directory.
+  * **7050 / 7052 / 7053** – Zone transfers and dynamic updates.
